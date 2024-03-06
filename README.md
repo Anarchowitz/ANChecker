@@ -1,2 +1,6 @@
 # HelonCheatCheker
-CS2 Cheat cheker helper for cs2
+Привет! Это (не) официальный чекер сделанный как (pet project) специально для сервера Helon Project (CS2)
+В нем все возможно 8 программ для проверки на читы/хранение читов. + батник с запуском %appdata%,%temp% и ему подобных
+С выходом новых читов - будет обновляться сигнатуры поиска по именам читов.
+
+(special thank foku for that files and bat file)
