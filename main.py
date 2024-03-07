@@ -2,18 +2,18 @@ import os
 import ctypes
 from time import sleep
 def clearscreen():
-    os.system('cls & title HelonChecker')
+    os.system('cls & title HelinChecker')
 def main():
     clearscreen()
     try:
-        print('HELON PROJECT')
+        print('HELIN PROJECT')
         print("""
         1. Открыть папки (recent/appdata/temp и т.д)
         2. Программы для проверки
         """)
         ans = input("Выбрано: ")
         if ans == '1':
-            path = 'C:/HelonChecker/assets'
+            path = 'C:/HelinChecker/assets'
             os.startfile(path + '/fileopenner.bat')
             return main()
         elif ans == '2':
@@ -28,7 +28,7 @@ def main():
     except KeyboardInterrupt:
         os._exit(1)
 def appscheck():
-    path = 'C:/HelonChecker/assets'
+    path = 'C:/HelinChecker/assets'
     apps = {
         '1': 'Lastactivityview/LastActivityView',
         '2': 'Everything/Everything',
@@ -40,7 +40,7 @@ def appscheck():
         '8': 'Shellbags/Shellbags'
     }
     clearscreen()
-    print('HELON PROJECT')
+    print('HELIN PROJECT')
     print("""
     1. Lastactivityview
     2. Everything
