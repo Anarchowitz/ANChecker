@@ -37,10 +37,7 @@ def main():
             gamecheck()
         elif ans == '2':
             script_dir = os.path.dirname(os.path.abspath(__file__))
-            print(script_dir)
             file_path = os.path.join(script_dir, 'assets', 'fileopenner.bat')
-            print(file_path)
-            os.system('pause')
             os.startfile(file_path)
             main()
         elif ans == '3':
