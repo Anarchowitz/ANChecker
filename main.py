@@ -31,7 +31,8 @@ def main():
         2. Открыть папки (recent/appdata/temp и т.д)
         3. Программы для проверки (LastActivity и т.д)
         4. Открытие популярных сайтов
-        [5]. Update logs       """)
+        [5]. Update logs       
+        """)
         ans = input("Выбрано: ")
         if ans == '1':
             gamecheck()
