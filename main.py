@@ -59,14 +59,14 @@ def main():
         Update season 1:
             07.03.2024 -> Release version! (v:1.0.0)
             08.03.2024 -> Remove useless function and false detection virus. (v:1.0.1)
-            09.03.2024 -> 
+            09.03.2024 -> (v:1.0.2)
                   [V] Correcting the path to the asset folder.
                   [V] Add new signatures to search for cheats
                   [V] Added new "CheatCheck" function
-            10.03.2024 -> (v:1.0.2)
+            10.03.2024 -> (v:1.0.3)
                   [V] Some minor fixes...
                   [V] Removed the dependency on the "Assets" folder!
-                  RELEASING VERSION: 1.0.2
+                  RELEASING VERSION: 1.0.3
         Update season 2:
             soon! (gui+new features )   
 (что бы вернуться назад нажмите любую кнопку)
