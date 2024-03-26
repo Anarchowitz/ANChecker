@@ -1,9 +1,9 @@
-
 import os
 import webbrowser
 import keyboard
 import pydirectinput as pyd
 from time import sleep
+current_working_directory = os.getcwd()
 def greetings():
     os.system('cls & title ANChecker')
     print("""
@@ -16,12 +16,13 @@ def greetings():
   ░   ▒▒ ░ ░░   ░ ▒░  ░  ▒    ▒ ░▒░ ░ ░ ░    ░  ▒   ░ ░▒ ▒░ ░ ░    ░▒ ░ ▒░
   ░   ▒     ░   ░ ░ ░         ░  ░░ ░   ░  ░        ░ ░░ ░    ░     ░   ░ 
       ░           ░ ░ ░       ░  ░  ░   ░  ░ ░      ░  ░      ░     ░     
-    Actually build v1.0.2 (10.03.2024)
+    Actually build v1.0.3 (26.03.2024)
     offical github - https://github.com/Anarchowitz/ANChecker
     """)
     sleep(2.6)
     os.system('pause')
     main()
+
 def main():
     os.system('cls')
     try:
@@ -31,16 +32,17 @@ def main():
         2. Открыть папки (recent/appdata/temp и т.д)
         3. Программы для проверки (LastActivity и т.д)
         4. Открытие популярных сайтов
-        [5]. Update logs       
+        [5]. Update Logs
         """)
         ans = input("Выбрано: ")
         if ans == '1':
             gamecheck()
         elif ans == '2':
             script_dir = os.path.dirname(os.path.abspath(__file__))
+            print(script_dir)
             file_path = os.path.join(script_dir, 'assets', 'fileopenner.bat')
+            print(file_path)
             os.startfile(file_path)
-            main()
         elif ans == '3':
             appscheck()
         elif ans == '4':
@@ -57,32 +59,32 @@ def main():
             print('UPDATE LOG!')
             print("""
         Update season 1:
-            07.03.2024 -> Release version! (v:1.0.0)
-            08.03.2024 -> Remove useless function and false detection virus. (v:1.0.1)
-            09.03.2024 -> (v:1.0.1)
-                  [V] Correcting the path to the asset folder.
-                  [V] Add new signatures to search for cheats
-                  [V] Added new "CheatCheck" function
-            10.03.2024 -> (v:1.0.2)
+            07.03.2024 -> Release version!
+            08.03.2024 -> Remove useless function and false detection virus.
+            09.03.2024 -> 
+                  [V] Fixing path to assets folder.
+                  [V] Add new signatures for finding cheats
+                  [V] Added new CheatCheck function
                   [V] Some minor fixes...
-                  [V] Removed the dependency on the "Assets" folder!
-                  RELEASING VERSION: 1.0.2
         Update season 2:
-            soon! (gui+new features )   
+            26.03.2024  ->
+                  [V] Added new checker - "REGSCANNER".
+                  [V] Fixed my mentality health 
+        (гуи не будет)
 (что бы вернуться назад нажмите любую кнопку)
         """)
             sleep(1.3)
-            os.system('pause & cls')
+            os.system('pause & cls') 
             main()
         else:
-            os.system('cls')
+            os.system('cls') 
             for i in range(5):
                 print('[ERROR] НАПИШИТЕ ЦИФРУ! (1-2)')
             sleep(3)
-            os.system('cls')
+            os.system('cls') 
             main()
     except KeyboardInterrupt:
-        os.exit(1)
+        os._exit(1)
 active=False
 def gamecheck():  # нажатие клавиш в игре  - ПОЛНЫЙ ГОВНОКОД НА КОСТЫЛЯХ
     os.system('cls')
@@ -132,9 +134,10 @@ def appscheck():
         '6': 'Userassistview/Userassistview',
         '7': 'Usbdeview/UsbDeview',
         '8': 'Shellbags/Shellbags',
-        '9': 'BrowserDownloadsView/BrowserDownloadsView'
+        '9': 'BrowserDownloadsView/BrowserDownloadsView',
+        '10': 'Regscanner/Regscanner'
     }
-    os.system('cls')
+    os.system('cls') 
     print('Programs Menu')
     print("""
     1. Lastactivityview
@@ -146,24 +149,25 @@ def appscheck():
     7. Usbdeview
     8. ShellbagsAnalyzer
     9. BrowserDownloadsView
+    10. RegScanner (Может быть распознан вирусом потому-что получает доступ к registry editor)
     ----------------------
-    10. <- ВЕРНУТЬСЯ НАЗАД!
+    11. <- ВЕРНУТЬСЯ НАЗАД!
     """)
     ans = input("Выбрано: ")
-    if ans == '10':
+    if ans == '11':
         main()
     elif ans in apps:
         script_dir = os.path.dirname(os.path.abspath(__file__))
         program_path = os.path.join(script_dir, 'assets', apps[ans])
         os.startfile(program_path)
         sleep(1)
-        os.system('cls')
+        os.system('cls') 
         appscheck()
     else:
         for _ in range(5):
-            print('[ERROR] НАПИШИТЕ ЦИФРУ! (1-10)')
+            print('[ERROR] НАПИШИТЕ ЦИФРУ! (1-11)')
         sleep(3)
-        os.system('cls')
+        os.system('cls') 
         appscheck()
 if __name__ == "__main__":
         greetings()
