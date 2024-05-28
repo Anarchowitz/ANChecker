@@ -1,3 +1,4 @@
+# ANCHECKER V2
 import sys, os, subprocess, configparser, time, webbrowser
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
