@@ -1,173 +1,134 @@
-import os
-import webbrowser
-import keyboard
-import pydirectinput as pyd
-from time import sleep
-current_working_directory = os.getcwd()
-def greetings():
-    os.system('cls & title ANChecker')
-    print("""
- ▄▄▄      ███▄    █  ▄████▄   ██░ ██ ▓█████ ▄████▄  ▀██ ▄█▀▓█████ ██▀███  
-▒████▄    ██ ▀█   █ ▒██▀ ▀█ ▒▓██░ ██ ▓█   ▀▒██▀ ▀█   ██▄█▒ ▓█   ▀▓██ ▒ ██▒
-▒██  ▀█▄ ▓██  ▀█ ██▒▒▓█    ▄░▒██▀▀██ ▒███  ▒▓█    ▄ ▓███▄░ ▒███  ▓██ ░▄█ ▒
-░██▄▄▄▄██▓██▒  ▐▌██▒▒▓▓▄ ▄██ ░▓█ ░██ ▒▓█  ▄▒▓▓▄ ▄██ ▓██ █▄ ▒▓█  ▄▒██▀▀█▄  
- ▓█   ▓██▒██░   ▓██░▒ ▓███▀  ░▓█▒░██▓░▒████▒ ▓███▀  ▒██▒ █▄░▒████░██▓ ▒██▒
- ▒▒   ▓▒█░ ▒░   ▒ ▒ ░ ░▒ ▒    ▒ ░░▒░▒░░ ▒░ ░ ░▒ ▒   ▒ ▒▒ ▓▒░░ ▒░ ░ ▒▓ ░▒▓░
-  ░   ▒▒ ░ ░░   ░ ▒░  ░  ▒    ▒ ░▒░ ░ ░ ░    ░  ▒   ░ ░▒ ▒░ ░ ░    ░▒ ░ ▒░
-  ░   ▒     ░   ░ ░ ░         ░  ░░ ░   ░  ░        ░ ░░ ░    ░     ░   ░ 
-      ░           ░ ░ ░       ░  ░  ░   ░  ░ ░      ░  ░      ░     ░     
-    Actually build v1.0.3 (26.03.2024)
-    offical github - https://github.com/Anarchowitz/ANChecker
-    """)
-    sleep(2.6)
-    os.system('pause')
-    main()
+import sys, os, subprocess, configparser, time, webbrowser
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform, QDesktopServices)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
+    QLabel, QLineEdit, QMainWindow, QPushButton,
+    QSizePolicy, QWidget, QTextEdit, QPlainTextEdit)
+from maininfo import Ui_MainWindow
+from easycheck import Ui_EasyCheck
+from hardcheck import Ui_HardCheck
+from sitecheck import Ui_SiteCheck
 
-def main():
-    os.system('cls')
-    try:
-        print('Main Menu')
-        print("""
-        1. Проверка в игре. (авто-прожатие INSERT и т.д)
-        2. Открыть папки (recent/appdata/temp и т.д)
-        3. Программы для проверки (LastActivity и т.д)
-        4. Открытие популярных сайтов
-        [5]. Update Logs
-        """)
-        ans = input("Выбрано: ")
-        if ans == '1':
-            gamecheck()
-        elif ans == '2':
-            script_dir = os.path.dirname(os.path.abspath(__file__))
-            print(script_dir)
-            file_path = os.path.join(script_dir, 'assets', 'fileopenner.bat')
-            print(file_path)
-            os.startfile(file_path)
-        elif ans == '3':
-            appscheck()
-        elif ans == '4':
-            os.system('cls')
-            print('Открываю сайты... \n УСПЕШНО!')
-            webbrowser.open('http://oplata.info')
-            webbrowser.open('http://midnight.im')
-            webbrowser.open('http://neverlose.cc')
-            webbrowser.open('http://xone.fun')
-            print('[Сообщение проверяющему]: Проверьте почту/вк у подозреваемого!')
-            os.system('pause & cls'); main()
-        elif ans == '5':
-            os.system('cls')
-            print('UPDATE LOG!')
-            print("""
-        Update season 1:
-            07.03.2024 -> Release version!
-            08.03.2024 -> Remove useless function and false detection virus.
-            09.03.2024 -> 
-                  [V] Fixing path to assets folder.
-                  [V] Add new signatures for finding cheats
-                  [V] Added new CheatCheck function
-                  [V] Some minor fixes...
-        Update season 2:
-            26.03.2024  ->
-                  [V] Added new checker - "REGSCANNER".
-                  [V] Fixed my mentality health 
-        (гуи не будет)
-(что бы вернуться назад нажмите любую кнопку)
-        """)
-            sleep(1.3)
-            os.system('pause & cls') 
-            main()
-        else:
-            os.system('cls') 
-            for i in range(5):
-                print('[ERROR] НАПИШИТЕ ЦИФРУ! (1-2)')
-            sleep(3)
-            os.system('cls') 
-            main()
-    except KeyboardInterrupt:
-        os._exit(1)
-active=False
-def gamecheck():  # нажатие клавиш в игре  - ПОЛНЫЙ ГОВНОКОД НА КОСТЫЛЯХ
-    os.system('cls')
-    print('Pressing keys in game')
-    def toggle_activation():
-        global active
-        active = not active
-        if active:
-            print('Начинаем цикл прожатия.')
-        else:
-            print('Цикл остановлен/Завершен!')
-            os.system('pause & cls')
-            main()
-    keyboard.add_hotkey('insert', toggle_activation)
-    keys_to_press = [
-        ('decimal', 'del'),
-        'fn',
-        'home',
-        ('ctrlleft', 'ctrlright'),
-        'end',
-        'pagedown',
-        'pageup',
-        'shiftright',
-        'shiftleft',
-        'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12', 'insert'
-    ]
-    def keyspressing():
-        if active:
-                for key in keys_to_press:
-                    if isinstance(key, str):
-                        pyd.press(key)
-                        print(f'Нажата клавиша: {key}')
-                    else:
-                        pyd.press(key[0])
-                        print(f'Нажата клавиша: {key[1]}')
-    while True:
-        sleep(1)
-        keyspressing()
-def appscheck():
-    path = 'assets'
-    apps = {
-        '1': 'Lastactivityview/LastActivityView',
-        '2': 'Everything/Everything',
-        '3': 'Openedfilesview/Openedfilesview',
-        '4': 'ExecutedProgramms/ExecutedProgramsList',
-        '5': 'HxD/HxD',
-        '6': 'Userassistview/Userassistview',
-        '7': 'Usbdeview/UsbDeview',
-        '8': 'Shellbags/Shellbags',
-        '9': 'BrowserDownloadsView/BrowserDownloadsView',
-        '10': 'Regscanner/Regscanner'
-    }
-    os.system('cls') 
-    print('Programs Menu')
-    print("""
-    1. Lastactivityview
-    2. Everything
-    3. Openedfilesview
-    4. ExecutedProgramms
-    5. HxD
-    6. Userassistview
-    7. Usbdeview
-    8. ShellbagsAnalyzer
-    9. BrowserDownloadsView
-    10. RegScanner (Может быть распознан вирусом потому-что получает доступ к registry editor)
-    ----------------------
-    11. <- ВЕРНУТЬСЯ НАЗАД!
-    """)
-    ans = input("Выбрано: ")
-    if ans == '11':
-        main()
-    elif ans in apps:
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        program_path = os.path.join(script_dir, 'assets', apps[ans])
-        os.startfile(program_path)
-        sleep(1)
-        os.system('cls') 
-        appscheck()
-    else:
-        for _ in range(5):
-            print('[ERROR] НАПИШИТЕ ЦИФРУ! (1-11)')
-        sleep(3)
-        os.system('cls') 
-        appscheck()
+
+class MainInfo(QMainWindow):
+    def __init__(self):
+        super(MainInfo, self).__init__()
+        self.ui= Ui_MainWindow()
+        self.ui.setupUi(self)
+        self.ui.pushButton_2.clicked.connect(self.open_easycheck)
+        self.ui.pushButton_3.clicked.connect(self.open_sitecheck)
+        self.ui.pushButton_4.clicked.connect(self.open_hardcheck)
+    def open_easycheck(self):
+        self.close()
+        self.easycheck = EasyCheck()
+        self.easycheck.show()
+    def open_hardcheck(self):
+        self.close()
+        self.easycheck = HardCheck()
+        self.easycheck.show()
+    def open_sitecheck(self):
+        self.close()
+        self.easycheck = SiteCheck()
+        self.easycheck.show()
+
+class EasyCheck(QMainWindow):
+    def __init__(self):
+        super(EasyCheck, self).__init__()
+        self.ui= Ui_EasyCheck()
+        self.ui.setupUi(self)
+        self.ui.information.clicked.connect(self.open_info)
+        self.ui.HardCheck.clicked.connect(self.open_hardcheck)
+        self.ui.sites.clicked.connect(self.open_sitecheck)
+        #--programs
+        self.ui.LastActivityView.clicked.connect(self.ui.open_LastActivityView)
+        self.ui.Shellbags.clicked.connect(self.ui.open_Shellbags)
+        self.ui.UserAsstisView.clicked.connect(self.ui.open_UserAssistView)
+        self.ui.UsbDeview.clicked.connect(self.ui.open_UsbDeview)
+        self.ui.JumpListView.clicked.connect(self.ui.open_JumpListView)
+        self.ui.OpenFolders.clicked.connect(self.ui.open_OpenFolders)
+        self.ui.ProcessHacker.clicked.connect(self.ui.open_ProcessHacker)
+    def open_info(self):
+        self.close()
+        self.easycheck = MainInfo()
+        self.easycheck.show()
+    def open_hardcheck(self):
+        self.close()
+        self.easycheck = HardCheck()
+        self.easycheck.show()
+    def open_sitecheck(self):
+        self.close()
+        self.easycheck = SiteCheck()
+        self.easycheck.show()
+
+class HardCheck(QMainWindow):
+    def __init__(self):
+        super(HardCheck, self).__init__()
+        self.ui= Ui_HardCheck()
+        self.ui.setupUi(self)
+        self.ui.pushButton_2.clicked.connect(self.open_easycheck)
+        self.ui.pushButton_3.clicked.connect(self.open_sitecheck)
+        self.ui.pushButton.clicked.connect(self.open_info)
+        #--programs
+        self.ui.hxd.clicked.connect(self.ui.open_HxD)
+        self.ui.sac.clicked.connect(self.ui.open_SAC)
+        self.ui.regscanner.clicked.connect(self.ui.open_RegScanner)
+        self.ui.downloadview.clicked.connect(self.ui.open_DownloadView)
+        self.ui.openedfilesview.clicked.connect(self.ui.open_OpenedFilesView)
+        self.ui.everything.clicked.connect(self.ui.open_Everything)
+        self.ui.MUICacheView.clicked.connect(self.ui.open_MUICacheView)
+    def open_easycheck(self):
+        self.close()
+        self.easycheck = EasyCheck()
+        self.easycheck.show()
+    def open_info(self):
+        self.close()
+        self.easycheck = MainInfo()
+        self.easycheck.show()
+    def open_sitecheck(self):
+        self.close()
+        self.easycheck = SiteCheck()
+        self.easycheck.show()
+
+class SiteCheck(QMainWindow):
+    def __init__(self):
+        super(SiteCheck, self).__init__()
+        self.ui= Ui_SiteCheck()
+        self.ui.setupUi(self)
+        self.ui.pushButton_2.clicked.connect(self.open_easycheck)
+        self.ui.pushButton_4.clicked.connect(self.open_hardcheck)
+        self.ui.pushButton.clicked.connect(self.open_info)
+        #--sites
+        self.ui.xonebutton.clicked.connect(self.ui.open_xone)
+        self.ui.midnightbutton.clicked.connect(self.ui.open_midnight)
+        self.ui.nixwarebutton.clicked.connect(self.ui.open_nixware)
+        self.ui.en1gmabutton.clicked.connect(self.ui.open_en1gma)
+        self.ui.predatorbutton.clicked.connect(self.ui.open_predator)
+        self.ui.gmailbutton.clicked.connect(self.ui.open_gmail)
+        self.ui.mailbutton.clicked.connect(self.ui.open_mail)
+        self.ui.oplatabutton.clicked.connect(self.ui.open_oplata)
+        self.ui.youtubebutton.clicked.connect(self.ui.open_ytstudio)
+        self.ui.vkgroupbutton.clicked.connect(self.ui.open_vkgroup)
+    def open_easycheck(self):
+        self.close()
+        self.easycheck = EasyCheck()
+        self.easycheck.show()
+    def open_info(self):
+        self.close()
+        self.easycheck = MainInfo()
+        self.easycheck.show()
+    def open_hardcheck(self):
+        self.close()
+        self.easycheck = HardCheck()
+        self.easycheck.show()
+
 if __name__ == "__main__":
-        greetings()
+    app = QApplication(sys.argv)
+    app.setStyle('Fusion')
+    window = MainInfo()
+    window.show()
+    sys.exit(app.exec())
